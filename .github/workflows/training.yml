@@ -1,0 +1,31 @@
+
+name: training
+on:
+  push:
+    branches:
+      - resume-test-1
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-west-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+      - name: Install project deps
+        run: pip install -r requirements.txt
+      - name: Run pipeline
+        env:
+          DVC_EXP_AUTO_PUSH: true
+          DVC_EXP_GIT_REMOTE: origin
+        run: |
+          git pull
+          dvc pull
+          dvc exp show --no-pager
+
