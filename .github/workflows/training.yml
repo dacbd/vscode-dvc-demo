@@ -26,6 +26,7 @@ jobs:
           DVC_EXP_AUTO_PUSH: true
           DVC_EXP_GIT_REMOTE: origin
         run: |
+          git config --list
           git pull
           dvc pull
           dvc exp show --no-pager
