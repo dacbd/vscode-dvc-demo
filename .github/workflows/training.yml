@@ -29,5 +29,5 @@ jobs:
           git pull
           dvc pull
           dvc exp show --no-pager
-          dvc exp run
+          dvc exp run --verbose
 
