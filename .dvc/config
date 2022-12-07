@@ -1,4 +1,5 @@
 [core]
-    remote = storage
-['remote "storage"']
-    url = https://remote.dvc.org/mnist-vscode
+    remote = aws
+['remote "aws"']
+    url = s3://daniel-test-delete-after-20230201
+    region = us-west-1
